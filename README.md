@@ -1,6 +1,6 @@
 # flash-card-game
 
-This is a flash card game called FlashMath that was built to practice multiplication tables. Other than multiplication, other operations are also available for practice. The applicatoin fulfills the following requirements:
+This is a flashcard game called FlashMath that was built to practice multiplication tables. Other than multiplication, other operations are also available for practice. The application fulfills the following requirements:
 1. Create a program for practicing multiplication tables
 2. Generate two random numbers between zero and 12
 3. Allow the user to input the product
@@ -20,9 +20,3 @@ This is a flash card game called FlashMath that was built to practice multiplica
 2. `cd src/FlashcardApi` and `dotnet run` to run the .NET API services. 
 3.  `cd src/flashcard-app` and install the necessary node modules by running `npm install`. 
 4. `npm run dev` to start using the application.
-
-
-### Potential Improvement Points
-1. Add Authentication, store user info and the highest score obtained.
-2. The user interface could be further improved to enhance the user experience.
-   
