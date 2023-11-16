@@ -18,7 +18,7 @@ public class CalculatorController : ControllerBase
     }
 
     [HttpGet("generate")]
-    public IActionResult Generate(int operandA, int operandB)
+    public IActionResult Generate()
     {
         Operands randomOperands = ValidateUniqueOperands();
 
