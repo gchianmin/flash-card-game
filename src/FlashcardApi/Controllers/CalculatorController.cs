@@ -7,6 +7,8 @@ namespace FlashcardApi.Controllers;
 public class CalculatorController : ControllerBase
 {
     private readonly ILogger<CalculatorController> _logger;
+
+    // hashset to store already generated pairs
     private static HashSet<Tuple<int, int>> generatedPairs = new HashSet<Tuple<int, int>>();
     private static int totalPairs = 169;
 
@@ -65,42 +67,6 @@ public class CalculatorController : ControllerBase
 
     }
 
-    // [HttpGet("add")]
-    // public IActionResult Add(int operandA, int operandB)
-    // {
-    //     int result = operandA + operandB;
-
-    //     return Ok(result);
-    // }
-
-    // [HttpGet("subtract")]
-    // public IActionResult Subtract(int operandA, int operandB)
-    // {
-    //     int result = operandA - operandB;
-
-    //     return Ok(result);
-    // }
-
-    // [HttpGet("multiply")]
-    // public IActionResult Multiply(int operandA, int operandB)
-    // {
-    //     int result = operandA * operandB;
-
-    //     return Ok(result);
-    // }
-
-    // [HttpGet("divide")]
-    // public IActionResult Divide(int operandA, int operandB)
-    // {
-    //     if (operandB == 0) {
-    //         return BadRequest("Cannot divide by zero.");
-    //     }
-
-    //     int result = operandA / operandB;
-
-    //     return Ok(result);
-    // }
-
     [HttpGet("restart")]
     public IActionResult Restart()
     {
@@ -112,9 +78,9 @@ public class CalculatorController : ControllerBase
     [HttpGet("gethashset")]
     public IActionResult GetHashSet()
     {
-        // generatedPairs.Clear();
 
         return Ok(generatedPairs);
+
     }
 
     private Operands GenerateOperands()

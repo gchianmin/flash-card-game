@@ -2,7 +2,6 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import { MdOutlineRestartAlt, MdOutlineHome } from "react-icons/md";
-
 import {
   Button,
   Row,
@@ -16,10 +15,8 @@ import {
   CardHeader,
   CardFooter,
   FormText,
-  FormFeedback,
   Toast,
   ToastBody,
-  ToastHeader,
 } from "reactstrap";
 import CountdownTimer from "@/components/CountdownTimer";
 
@@ -40,7 +37,6 @@ export default function Page() {
     generateOperands();
     restart();
     console.log("called");
- 
   }, [router.isReady]);
 
   let symbol = "";
@@ -84,7 +80,6 @@ export default function Page() {
 
     const resp = await fetch(`https://localhost:7172/Calculator/gethashset`);
     const dat = await resp.json();
-    console.log(dat);
     setHs(dat);
   };
 
@@ -92,9 +87,7 @@ export default function Page() {
     try {
       setScore(0);
       await fetch(`https://localhost:7172/Calculator/restart`);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   const handleSubmit = async (event) => {
@@ -113,12 +106,11 @@ export default function Page() {
         setTimeout(() => {
           setIsCorrectAnswer(null);
         }, 800);
+
         // avoid mark being negative
         if (mark > 0) {
-          
           mark = score - 1;
           setScore(mark);
-          
         }
       } else {
         setIsCorrectAnswer(true);
@@ -127,9 +119,7 @@ export default function Page() {
         setTimeout(() => {
           setIsCorrectAnswer(null);
         }, 800);
-        // if (mark > highestScore) {
-        //   setHighestScore(mark);
-        // }
+
         // after submitting the correct ans, generate another operands
         await generateOperands();
       }
@@ -146,20 +136,8 @@ export default function Page() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="./logo.ico" />
       </Head>
+
       <main>
-        {/* <div>
-          <CountdownCircleTimer
-            isPlaying
-            duration={60}
-            colors={[
-              ["#004777", 0.33],
-              ["#F7B801", 0.33],
-              ["#A30000", 0.33],
-            ]}
-          >
-            {({ remainingTime }) => remainingTime}
-          </CountdownCircleTimer>
-        </div> */}
         <div className="text-center">
           <Row xs="2" className="m-5">
             <Col>
@@ -168,6 +146,7 @@ export default function Page() {
                 Home
               </Button>
             </Col>
+
             <Col>
               {" "}
               <Button outline color="success" onClick={() => router.reload()}>
@@ -183,6 +162,7 @@ export default function Page() {
             <CardHeader tag="h5">
               <Row xs="2">
                 <Col>Current Score: {score}</Col>
+
                 <Col className="d-flex flex-row justify-content-end p-1">
                   Time Remaining:{" "}
                   <CountdownTimer
@@ -191,7 +171,6 @@ export default function Page() {
                     operation={operation}
                   />
                 </Col>
-                {/* <Col>Highest Score: {highestScore}</Col> */}
               </Row>
             </CardHeader>
 
@@ -216,6 +195,7 @@ export default function Page() {
                     </FormText>
                   </Col>
                 </FormGroup>
+
                 <FormGroup check row>
                   <Col>
                     <Button color="primary">Submit</Button>
@@ -224,22 +204,20 @@ export default function Page() {
               </Form>
             </CardFooter>
           </Card>
+
           <div className="container mx-5 rounded">
-      
-      {isCorrectAnswer && (<Toast className="bg-success text-white">
-          <ToastBody>
-            Well done!
-          </ToastBody>
-        </Toast>)}
+            {isCorrectAnswer && (
+              <Toast className="bg-success text-white">
+                <ToastBody>Well done!</ToastBody>
+              </Toast>
+            )}
 
-        {!isCorrectAnswer  && isCorrectAnswer != null && (<Toast className="bg-danger text-white">
-          <ToastBody>
-            Try again.
-          </ToastBody>
-        </Toast>)}
-
- 
-      </div>
+            {!isCorrectAnswer && isCorrectAnswer != null && (
+              <Toast className="bg-danger text-white">
+                <ToastBody>Try again.</ToastBody>
+              </Toast>
+            )}
+          </div>
         </div>
       </main>
     </>
